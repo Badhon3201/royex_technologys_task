@@ -7,8 +7,7 @@ import 'package:royex_technologys_task/app/core/values/color_manager.dart';
 import 'package:royex_technologys_task/app/core/values/string_resources.dart';
 import 'package:royex_technologys_task/app/data/models/labels_response_model.dart';
 import 'package:royex_technologys_task/app/modules/issues/controllers/issues_controller.dart';
-
-import 'label_selected_card_widget.dart';
+import 'package:royex_technologys_task/app/modules/issues/views/widgets/selected_label_card_widget.dart';
 
 class FiltersWidget extends StatelessWidget {
   const FiltersWidget({super.key, required this.labelList});
@@ -65,7 +64,7 @@ class FiltersWidget extends StatelessWidget {
           return Wrap(
             children: [
               for (var item in controller.selectedLabelsList)
-                LabelSelectedCardWidget(
+                SelectedLabelCardWidget(
                     labels: item,
                     onTap: () async {
                       controller.selectedLabelItem.value = null;

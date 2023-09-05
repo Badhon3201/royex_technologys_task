@@ -5,8 +5,8 @@ import 'package:royex_technologys_task/app/core/widgets/TextWidget.dart';
 
 import 'package:royex_technologys_task/app/data/models/labels_response_model.dart';
 
-class LabelSelectedCardWidget extends StatelessWidget {
-  const LabelSelectedCardWidget(
+class SelectedLabelCardWidget extends StatelessWidget {
+  const SelectedLabelCardWidget(
       {super.key, required this.labels, required this.onTap});
 
   final LabelsResponseModel labels;

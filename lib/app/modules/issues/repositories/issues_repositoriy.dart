@@ -1,9 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
-
 import 'package:royex_technologys_task/app/core/utils/api_service/api_service.dart';
 import 'package:royex_technologys_task/app/core/utils/api_service/urls.dart';
 import 'package:royex_technologys_task/app/core/utils/failure/app_error.dart';
@@ -19,7 +16,6 @@ class IssuesRepository {
             ? '${Urls.baseUrl}repos/flutter/flutter/issues?page=$page&labels=$labels'
             : '${Urls.baseUrl}repos/flutter/flutter/issues?page=$page',
       );
-      debugPrint(res.statusCode.toString());
       if (res.statusCode == 200) {
         final decodedJson = json.decode(utf8.decode(res.bodyBytes));
         final issueResponseModel = <IssuesResponseModel>[];
@@ -31,11 +27,9 @@ class IssuesRepository {
       } else {
         return const Left(AppError.httpError);
       }
-    } on SocketException catch (e) {
-      debugPrint(e.toString());
+    } on SocketException {
       return const Left(AppError.networkError);
     } catch (e) {
-      debugPrint(e.toString());
       return const Left(AppError.unknownError);
     }
   }
@@ -49,7 +43,6 @@ class IssuesRepository {
             ? '${Urls.baseUrl}repos/flutter/flutter/labels'
             : '${Urls.baseUrl}repos/flutter/flutter/labels/$keyword',
       );
-      debugPrint(res.statusCode.toString());
       if (res.statusCode == 200) {
         final decodedJson = json.decode(utf8.decode(res.bodyBytes));
         final labelsResponseModel = <LabelsResponseModel>[];
@@ -61,11 +54,9 @@ class IssuesRepository {
       } else {
         return const Left(AppError.httpError);
       }
-    } on SocketException catch (e) {
-      debugPrint(e.toString());
+    } on SocketException {
       return const Left(AppError.networkError);
     } catch (e) {
-      debugPrint(e.toString());
       return const Left(AppError.unknownError);
     }
   }

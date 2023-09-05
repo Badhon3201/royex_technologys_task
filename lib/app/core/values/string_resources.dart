@@ -11,4 +11,6 @@ class StringResources {
 
   static String somethingIsWrong = 'Something is wrong';
 
+  static String noDataFound = 'No data found';
+
 }

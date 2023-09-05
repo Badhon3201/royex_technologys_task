@@ -16,10 +16,10 @@ class IssuesController extends GetxController {
   final _isLoading = false.obs;
   final _isMoreLoading = false.obs;
   final _isMoreLoadingEnable = true.obs;
-  final currentPage = 1.obs;
-  final listLength = 0.obs;
+  final _currentPage = 1.obs;
+  final _listLength = 0.obs;
+  final _selectedLabelItem = Rxn<LabelsResponseModel>();
   final scrollController = ScrollController();
-  Rxn<LabelsResponseModel> selectedLabelItem = Rxn<LabelsResponseModel>();
   TextEditingController searchController = TextEditingController();
 
   @override
@@ -49,23 +49,23 @@ class IssuesController extends GetxController {
   Future<void> getIssuesListData() async {
     _isLoading.value = true;
     final response = await issuesRepository.fetchIssuesList(
-      labels: selectedLabelItem.value?.name,
+      labels: _selectedLabelItem.value?.name,
     );
     _isLoading.value = false;
     response.fold((l) {
       _appError = l;
     }, (r) {
       _issuesList.value = r;
-      listLength.value = r.length;
-      currentPage.value++;
+      _listLength.value = r.length;
+      _currentPage.value++;
     });
   }
 
   Future<void> getMoreIssuesListData() async {
     _isMoreLoading.value = true;
     final response = await issuesRepository.fetchIssuesList(
-      page: currentPage.value,
-      labels: selectedLabelItem.value?.name,
+      page: _currentPage.value,
+      labels: _selectedLabelItem.value?.name,
     );
     _isMoreLoading.value = false;
     _isMoreLoadingEnable.value = false;
@@ -74,7 +74,7 @@ class IssuesController extends GetxController {
     }, (r) {
       _issuesMoreList.value = r;
       _issuesList.addAll(r);
-      currentPage.value++;
+      _currentPage.value++;
     });
   }
 
@@ -84,7 +84,7 @@ class IssuesController extends GetxController {
           scrollController.position.maxScrollExtent) {
         if (_isMoreLoadingEnable.value) {
           await getMoreIssuesListData();
-        } else if (_issuesMoreList.length == listLength.value &&
+        } else if (_issuesMoreList.length == _listLength.value &&
             _isMoreLoadingEnable.isFalse) {
           await getMoreIssuesListData();
         }
@@ -95,6 +95,7 @@ class IssuesController extends GetxController {
   RxList<LabelsResponseModel> get labelsList => _labelsList;
   RxList<LabelsResponseModel> get selectedLabelsList => _selectedLabelsList;
   List<IssuesResponseModel> get issuesList => _issuesList;
+  Rxn<LabelsResponseModel> get selectedLabelItem => _selectedLabelItem;
   AppError get appError => _appError;
   RxBool get isLoading => _isLoading;
   RxBool get isMoreLoading => _isMoreLoading;

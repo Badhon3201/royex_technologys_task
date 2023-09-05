@@ -4,6 +4,7 @@ import 'package:royex_technologys_task/app/core/utils/common_space.dart';
 import 'package:royex_technologys_task/app/core/utils/styles.dart';
 import 'package:royex_technologys_task/app/core/values/color_manager.dart';
 import 'package:royex_technologys_task/app/core/values/string_resources.dart';
+import 'package:royex_technologys_task/app/core/widgets/TextWidget.dart';
 import 'package:royex_technologys_task/app/core/widgets/page_state_builder.dart';
 import 'package:royex_technologys_task/app/modules/issues/controllers/issues_controller.dart';
 import 'package:royex_technologys_task/app/modules/issues/views/widgets/filters_widget.dart';
@@ -63,27 +64,29 @@ class IssuesView extends GetView<IssuesController> {
 
   Widget _listSection() {
     return Expanded(
-      child: ListView.builder(
-        controller: controller.scrollController,
-        primary: false,
-        shrinkWrap: true,
-        itemCount: controller.issuesList.length,
-        itemBuilder: (context, index) {
-          controller.isIssueExpanded.add(false);
-          return InkWell(
-            onTap: () {
-              controller.isIssueExpanded[index] =
-                  !controller.isIssueExpanded[index];
-            },
-            child: Obx(() {
-              return IssueListTile(
-                issueItem: controller.issuesList[index],
-                isExpanded: controller.isIssueExpanded[index],
-              );
-            }),
-          );
-        },
-      ),
+      child: controller.issuesList.isEmpty
+          ? Center(child: CustomTextWidget(text: StringResources.noDataFound))
+          : ListView.builder(
+              controller: controller.scrollController,
+              primary: false,
+              shrinkWrap: true,
+              itemCount: controller.issuesList.length,
+              itemBuilder: (context, index) {
+                controller.isIssueExpanded.add(false);
+                return InkWell(
+                  onTap: () {
+                    controller.isIssueExpanded[index] =
+                        !controller.isIssueExpanded[index];
+                  },
+                  child: Obx(() {
+                    return IssueListTile(
+                      issueItem: controller.issuesList[index],
+                      isExpanded: controller.isIssueExpanded[index],
+                    );
+                  }),
+                );
+              },
+            ),
     );
   }
 
