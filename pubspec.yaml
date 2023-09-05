@@ -1,0 +1,26 @@
+name: royex_technologys_task
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=3.0.6 <4.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.2
+  dartz: ^0.10.1
+  http: ^1.1.0
+  intl: ^0.18.1
+  dropdown_search: ^5.0.6
+  get: 4.6.5
+  flutter: 
+    sdk: flutter
+
+dev_dependencies:
+  very_good_analysis: ^5.0.0+1
+  flutter_lints: ^2.0.0
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  uses-material-design: true
+
