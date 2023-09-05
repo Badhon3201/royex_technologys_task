@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:label="royex_technologys_task"
+        android:label="Royex_technologys_task"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

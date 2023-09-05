@@ -19,7 +19,7 @@ class CommonSpace {
   );
 
   static EdgeInsets commonPagePadding =
-      EdgeInsets.only(left: 20.r, right: 20.r);
+      EdgeInsets.only(left: 20, right: 20);
 
   static EdgeInsets cardPadding = EdgeInsets.only(top: 8.r, bottom: 8.r);
 

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:royex_technologys_task/app/core/utils/api_service/urls.dart';
 
 class ApiService {
   http.Client? httClient;
